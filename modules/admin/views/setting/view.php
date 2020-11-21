@@ -21,8 +21,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <table id="w0" class="table table-striped table-bordered detail-view">
         <tbody>
             <tr>
-                <th>Кол-во элементов на страницу (для книг)</th>
-                <td><?= \Yii::$app->settings->get('admin.pageSize') ?></td>
+                <th>Кол-во элементов на страницу в админке (для книг)</th>
+                <td><?= \Yii::$app->settings->get('admin.pageSizeBack') ?></td>
+            </tr>
+            <tr>
+                <th>Кол-во элементов на страницу на сайте (для книг)</th>
+                <td><?= \Yii::$app->settings->get('admin.pageSizeFront') ?></td>
             </tr>
             <tr>
                 <th>Email адрес получателя сообщения с формы обратной связи</th>

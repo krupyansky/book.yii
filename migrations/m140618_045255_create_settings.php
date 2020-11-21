@@ -40,8 +40,15 @@ class m140618_045255_create_settings extends \yii\db\Migration
         $this->insert('{{%settings}}', [
             'type' => 'integer',
             'section' => 'admin',
-            'key' => 'pageSize',
-            'value' => 30,
+            'key' => 'pageSizeFront',
+            'value' => 20,
+            'active' => 1,
+        ]);
+        $this->insert('{{%settings}}', [
+            'type' => 'integer',
+            'section' => 'admin',
+            'key' => 'pageSizeBack',
+            'value' => 20,
             'active' => 1,
         ]);
         $this->insert('{{%settings}}', [
@@ -56,7 +63,8 @@ class m140618_045255_create_settings extends \yii\db\Migration
     public function down()
     {
         $this->delete('{{%user}}', ['key' => 'adminEmail', 'section' => 'admin']);
-        $this->delete('{{%user}}', ['key' => 'pageSize', 'section' => 'admin']);
+        $this->delete('{{%user}}', ['key' => 'pageSizeFront', 'section' => 'admin']);
+        $this->delete('{{%user}}', ['key' => 'pageSizeBack', 'section' => 'admin']);
         $this->delete('{{%user}}', ['key' => 'urlParse', 'section' => 'admin']);
         $this->dropTable('{{%settings}}');
     }

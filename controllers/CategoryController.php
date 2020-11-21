@@ -3,7 +3,7 @@
 namespace app\controllers;
 
 use app\models\Category;
-use app\models\Product;
+use app\models\Book;
 
 /**
  * Контроллер, отвечающий за отображение категорий и поиск товаров
@@ -25,20 +25,20 @@ class CategoryController extends AppController
         $this->setMeta(\Yii::$app->name . " | {$category->title}");
         
         if($filter_title_book){
-            $query = Product::find()->joinWith('productcategories')->andFilterWhere(['book_category.category_id' => $id])->andFilterWhere(['like', 'book.title', $filter_title_book]);
+            $query = Book::find()->joinWith('bookCategories')->andFilterWhere(['book_category.category_id' => $id])->andFilterWhere(['like', 'book.title', $filter_title_book]);
         } elseif($filter_name_author){
-            $query = Product::find()->joinWith('productcategories')->joinWith('authors')->andFilterWhere(['book_category.category_id' => $id])->andFilterWhere(['like', 'author.name', $filter_name_author]);
+            $query = Book::find()->joinWith('bookCategories')->joinWith('authors')->andFilterWhere(['book_category.category_id' => $id])->andFilterWhere(['like', 'author.name', $filter_name_author]);
         } elseif($filter_status_book){
-            $query = Product::find()->joinWith('productcategories')->andFilterWhere(['book_category.category_id' => $id, 'book.status' => $filter_status_book]);
+            $query = Book::find()->joinWith('bookCategories')->andFilterWhere(['book_category.category_id' => $id, 'book.status' => $filter_status_book]);
         } else {
-            $query = Product::find()->joinWith('productcategories')->andFilterWhere(['book_category.category_id' => $id]);
+            $query = Book::find()->joinWith('bookCategories')->andFilterWhere(['book_category.category_id' => $id]);
         }  
-        $pages = new \yii\data\Pagination(['totalCount' => $query->count(), 'pageSize' => 20, 'forcePageParam' => false, 'pageSizeParam' => false]);
-        $products = $query->offset($pages->offset)->limit($pages->limit)->all();
+        $pages = new \yii\data\Pagination(['totalCount' => $query->count(), 'pageSize' => \Yii::$app->settings->get('admin.pageSizeFront'), 'forcePageParam' => false, 'pageSizeParam' => false]);
+        $books = $query->offset($pages->offset)->limit($pages->limit)->all();
         
         $breadcrumbs = Category::getBreadcrumbs($id);
-        $options = Product::find()->joinWith('productcategories')->andFilterWhere(['book_category.category_id' => $id])->select('book.status')->distinct()->all();
-        return $this->render('view', compact('category', 'subcategories', 'products', 'breadcrumbs', 'pages', 'options'));
+        $options = Book::find()->joinWith('bookCategories')->andFilterWhere(['book_category.category_id' => $id])->select('book.status')->distinct()->all();
+        return $this->render('view', compact('category', 'subcategories', 'books', 'breadcrumbs', 'pages', 'options'));
     }
     
     public function actionSearch() 
@@ -48,9 +48,9 @@ class CategoryController extends AppController
         if(!$search){
             return $this->render('search');
         }
-        $query = Product::find()->where(['like', 'title', $search]);
-        $pages = new \yii\data\Pagination(['totalCount' => $query->count(), 'pageSize' => 20, 'forcePageParam' => false, 'pageSizeParam' => false]);
-        $products = $query->offset($pages->offset)->limit($pages->limit)->all();
-        return $this->render('search', compact('products', 'search', 'pages'));
+        $query = Book::find()->where(['like', 'title', $search]);
+        $pages = new \yii\data\Pagination(['totalCount' => $query->count(), 'pageSize' => \Yii::$app->settings->get('admin.pageSizeFront'), 'forcePageParam' => false, 'pageSizeParam' => false]);
+        $books = $query->offset($pages->offset)->limit($pages->limit)->all();
+        return $this->render('search', compact('books', 'search', 'pages'));
     }
 }

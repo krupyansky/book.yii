@@ -77,9 +77,9 @@ class Order extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function getOrderProduct()
+    public function getOrderBook()
     {
-        return $this->hasMany(OrderProduct::class, ['order_id' => 'id']);
+        return $this->hasMany(OrderBook::class, ['order_id' => 'id']);
     }
     
     /**

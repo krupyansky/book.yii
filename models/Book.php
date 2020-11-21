@@ -8,7 +8,7 @@ use yii\db\ActiveRecord;
  * Модель, отвечающая за работу продуктов
  *
  */
-class Product extends ActiveRecord
+class Book extends ActiveRecord
 {
     public static function tableName() 
     {
@@ -25,23 +25,23 @@ class Product extends ActiveRecord
         ];
     }
     
-    public function getProductauthors()
+    public function getBookAuthors()
     {
-        return $this->hasMany(Productauthor::className(), ['book_id' => 'id']);
+        return $this->hasMany(BookAuthor::class, ['book_id' => 'id']);
     }
     
     public function getAuthors()
     {
-        return $this->hasMany(Author::className(), ['id' => 'author_id'])->via('productauthors');
+        return $this->hasMany(Author::class, ['id' => 'author_id'])->via('bookAuthors');
     }
 
-    public function getProductcategories()
+    public function getBookCategories()
     {
-        return $this->hasMany(Productcategory::className(), ['book_id' => 'id']);
+        return $this->hasMany(BookCategory::class, ['book_id' => 'id']);
     }
     
     public function getCategories()
     {
-        return $this->hasMany(Category::className(), ['id' => 'category_id'])->via('productcategories');
+        return $this->hasMany(Category::class, ['id' => 'category_id'])->via('bookCategories');
     }
 }

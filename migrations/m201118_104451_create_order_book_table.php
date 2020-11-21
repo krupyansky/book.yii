@@ -3,16 +3,16 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%order_product}}`.
+ * Handles the creation of table `{{%order_book}}`.
  */
-class m201118_104451_create_order_product_table extends Migration
+class m201118_104451_create_order_book_table extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function up()
     {
-        $this->createTable('{{%order_product}}', [
+        $this->createTable('{{%order_book}}', [
             'id' => $this->primaryKey(),
             'order_id' => $this->integer()->notNull(),
             'book_id' => $this->integer()->notNull(),
@@ -26,6 +26,6 @@ class m201118_104451_create_order_product_table extends Migration
      */
     public function down()
     {
-        $this->dropTable('{{%order_product}}');
+        $this->dropTable('{{%order_book}}');
     }
 }

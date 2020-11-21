@@ -7,15 +7,15 @@
         </tr>
         </thead>
         <tbody>
-        <?php foreach($session['cart'] as $id => $item):?>
+        <?php foreach($session['cart'] as $id => $item): ?>
             <tr>
-                <td style="padding: 10px; border: 1px solid #000;"><?= $item['title']?></td>
-                <td style="padding: 10px; border: 1px solid #000;"><?= $item['qty']?></td>
+                <td style="padding: 10px; border: 1px solid #000;"><?= $item['title'] ?></td>
+                <td style="padding: 10px; border: 1px solid #000;"><?= $item['qty'] ?></td>
             </tr>
-        <?php endforeach?>
+        <?php endforeach; ?>
         <tr>
             <td style="padding: 10px; border: 1px solid #000;">Всего книг: </td>
-            <td style="padding: 10px; border: 1px solid #000;"><?= $session['cart.qty']?></td>
+            <td style="padding: 10px; border: 1px solid #000;"><?= $session['cart.qty'] ?></td>
         </tr>
         </tbody>
     </table>

@@ -38,7 +38,7 @@ class BookController extends AppAdminController
     {
         $searchModel = new BookSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->pagination->pageSize = Yii::$app->settings->get('admin.pageSize');
+        $dataProvider->pagination->pageSize = Yii::$app->settings->get('admin.pageSizeBack');
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

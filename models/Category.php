@@ -26,9 +26,9 @@ class Category extends ActiveRecord
         ];
     }
     
-    public function getProductcategories()
+    public function getBookCategories()
     {
-        return $this->hasMany(Productcategory::className(), ['category_id' => 'id']);
+        return $this->hasMany(BookCategory::class, ['category_id' => 'id']);
     }
     
     public static function getBreadcrumbs($id)

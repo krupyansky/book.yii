@@ -16,7 +16,7 @@ class MenuWidget extends Widget
      * @var array $data - массив категорий из таблицы.
      * @var array $tree - (массив) "дерево" категорий.
      * @var string $menuHtml - (вид) html меню категорий.
-     * @var object $model - объект получаемой модели. (см. _form.php в app/modules/admin/views/product/_form.php)
+     * @var object $model - объект получаемой модели. (см. _form.php в app/modules/admin/views/book/_form.php)
      * @var integer $cache_time - длительность хранения кэша меню.
      */
     public $template;

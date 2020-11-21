@@ -2,10 +2,10 @@
 
 namespace app\controllers;
 
-use app\models\Product;
+use app\models\Book;
 use app\models\Cart;
 use app\models\Order;
-use app\models\OrderProduct;
+use app\models\OrderBook;
 use app\models\OrderMail;
 
 /**
@@ -16,14 +16,14 @@ class CartController extends AppController
 {
     public function actionAdd($id) 
     {
-        $product = Product::findOne($id);
-        if(empty($product)){
+        $book = Book::findOne($id);
+        if(empty($book)){
             return false;
         }
         $session = \Yii::$app->session;
         $session->open();
         $cart = new Cart();
-        $cart->addToCart($product);
+        $cart->addToCart($book);
         if(\Yii::$app->request->isAjax){
             return $this->renderPartial('cart-modal', compact('session'));
         }
@@ -60,14 +60,14 @@ class CartController extends AppController
     
     public function actionChangeCart($id, $qty) 
     {
-        $product = Product::findOne($id);
-        if(empty($product)){
+        $book = Book::findOne($id);
+        if(empty($book)){
             return false;
         }
         $session = \Yii::$app->session;
         $session->open();
         $cart = new Cart();
-        $cart->addToCart($product, $qty);
+        $cart->addToCart($book, $qty);
         return $this->renderPartial('cart-modal', compact('session'));
     }
     
@@ -84,11 +84,11 @@ class CartController extends AppController
         $session = \Yii::$app->session;
         
         $order = new Order();
-        $order_product = new OrderProduct();
+        $order_book = new OrderBook();
         $order_mail = new OrderMail();
         if($order->load(\Yii::$app->request->post())){
             $transaction = \Yii::$app->getDb()->beginTransaction();
-            if(!$order->save() || !$order_product->saveOrderProducts($session['cart'], $order->id)){
+            if(!$order->save() || !$order_book->saveOrderBooks($session['cart'], $order->id)){
                 \Yii::$app->session->setFlash('error', 'Ошибка оформления заказа!');
                 $transaction->rollBack();
             }else{

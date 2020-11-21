@@ -5,14 +5,14 @@ namespace app\models;
 use yii\db\ActiveRecord;
 
 /**
- * Модель, отвечающая за формирование таблица order_product
+ * Модель, отвечающая за формирование таблица order_book
  *
  */
-class OrderProduct extends ActiveRecord
+class OrderBook extends ActiveRecord
 {
     public static function tableName(): string
     {
-        return 'order_product';
+        return 'order_book';
     }
     
     public function rules()
@@ -24,15 +24,15 @@ class OrderProduct extends ActiveRecord
         ];
     }
     
-    public function saveOrderProducts($products, $order_id)
+    public function saveOrderBooks($books, $order_id)
     {
-        foreach ($products as $id => $product){
+        foreach ($books as $id => $book){
             $this->id = null;
             $this->isNewRecord = true;
             $this->order_id = $order_id;
             $this->book_id = $id;
-            $this->title = $product['title'];
-            $this->qty = $product['qty'];
+            $this->title = $book['title'];
+            $this->qty = $book['qty'];
             if(!$this->save()){
                 return false;
             }

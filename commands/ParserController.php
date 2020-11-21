@@ -3,11 +3,11 @@
 namespace app\commands;
 
 use yii\console\Controller;
-use app\models\Product;
+use app\models\Book;
 use app\models\Author;
 use app\models\Category;
-use app\models\Productauthor;
-use app\models\Productcategory;
+use app\models\BookAuthor;
+use app\models\BookCategory;
 
 /**
  * Парсит книги из файла json в БД
@@ -39,7 +39,7 @@ class ParserController extends Controller
 
         foreach ($data as $datum) {
             // insert to book table
-            $book = new Product();
+            $book = new Book();
             $book_arr = array_diff_key($datum, array_flip([
                 'authors',
                 'categories',
@@ -49,7 +49,7 @@ class ParserController extends Controller
                 $book_arr['publishedDate'] = substr($book_arr['publishedDate']['$date'], 0, 10);
             }
             
-            if (isset($book_arr['isbn']) && !Product::find()->where(['isbn' => $book_arr['isbn']])->exists() && $book->load($book_arr, '')) {
+            if (isset($book_arr['isbn']) && !Book::find()->where(['isbn' => $book_arr['isbn']])->exists() && $book->load($book_arr, '')) {
                 // add images
                 if (isset($datum['thumbnailUrl'])) {
                     $pos_dot = strrpos($datum['thumbnailUrl'], '.') + 1;
@@ -123,7 +123,7 @@ class ParserController extends Controller
                 }
 
                 // insert to book_author table
-                if ($last_author_id != 0) self::insertProductauthor($last_book_id, $last_author_id);
+                if ($last_author_id != 0) self::insertBookAuthor($last_book_id, $last_author_id);
             }
         }
     }
@@ -135,9 +135,9 @@ class ParserController extends Controller
      * @param integer $last_author_id - id автора данной книги
      * @return void
      */
-    protected function insertProductauthor($last_book_id, $last_author_id)
+    protected function insertBookAuthor($last_book_id, $last_author_id)
     {
-        $book_author = new Productauthor;
+        $book_author = new BookAuthor;
         if ($book_author->load(['book_id' => $last_book_id, 'author_id' => $last_author_id], '')) {
             $transaction = \Yii::$app->getDb()->beginTransaction();
             if (!$book_author->save()) {
@@ -181,12 +181,12 @@ class ParserController extends Controller
                     }
 
                     // insert to book_author table
-                    if ($last_category_id != 0) self::insertProductcategory($last_book_id, $last_category_id);
+                    if ($last_category_id != 0) self::insertBookCategory($last_book_id, $last_category_id);
                 }
             }
         } else {
             $last_category_id = 1;
-            self::insertProductcategory($last_book_id, $last_category_id);
+            self::insertBookCategory($last_book_id, $last_category_id);
         }  
     }
 
@@ -197,9 +197,9 @@ class ParserController extends Controller
      * @param integer $last_category_id - id категории данной книги
      * @return void
      */
-    protected function insertProductcategory($last_book_id, $last_category_id)
+    protected function insertBookCategory($last_book_id, $last_category_id)
     {
-        $book_category = new Productcategory;
+        $book_category = new BookCategory;
         if ($book_category->load(['book_id' => $last_book_id, 'category_id' => $last_category_id], '')) {
             $transaction = \Yii::$app->getDb()->beginTransaction();
             if (!$book_category->save()) {

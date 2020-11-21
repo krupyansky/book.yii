@@ -17,14 +17,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'pageSize')->textInput(['maxlength' => true, 'value' => \Yii::$app->settings->get('admin.pageSize')]) ?>
-    <?//= $form->field($model, 'pageSize')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'pageSizeBack')->textInput(['maxlength' => true, 'value' => \Yii::$app->settings->get('admin.pageSizeBack')]) ?>
+    
+    <?= $form->field($model, 'pageSizeFront')->textInput(['maxlength' => true, 'value' => \Yii::$app->settings->get('admin.pageSizeFront')]) ?>
 
     <?= $form->field($model, 'adminEmail')->textInput(['maxlength' => true, 'value' => \Yii::$app->settings->get('admin.adminEmail')]) ?>
-    <?//= $form->field($model, 'adminEmail')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'urlParse')->textInput(['maxlength' => true, 'value' => \Yii::$app->settings->get('admin.urlParse')]) ?>
-    <?//= $form->field($model, 'urlParse')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>

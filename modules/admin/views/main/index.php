@@ -10,7 +10,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- small box -->
         <div class="small-box bg-green">
             <div class="inner">
-              <h3><?= $products ?></h3>
+              <h3><?= $books ?></h3>
               <p>Продуктов</p>
             </div>
             <div class="icon">

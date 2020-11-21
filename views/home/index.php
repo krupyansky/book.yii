@@ -11,7 +11,7 @@
                 <div class="pi-pic">
                     <?= \yii\helpers\Html::img("@web/{$last_book->thumbnailUrl}", ['alt' => $last_book->title]) ?>
                     <div class="pi-links">
-                        <a href="<?= \yii\helpers\Url::to(['product/view', 'id' => $last_book->id]) ?>" class="add-card">
+                        <a href="<?= \yii\helpers\Url::to(['book/view', 'id' => $last_book->id]) ?>" class="add-card">
                             <i class="flaticon-bag"></i>
                             <span>В КОРЗИНУ</span>
                         </a>

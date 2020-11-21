@@ -14,7 +14,8 @@ class Setting extends Model
      * {@inheritdoc}
      */
     public $adminEmail;
-    public $pageSize;
+    public $pageSizeBack;
+    public $pageSizeFront;
     public $urlParse;
     
     /**
@@ -24,7 +25,7 @@ class Setting extends Model
     {
         return [
             [['adminEmail', 'urlParse'], 'string', 'max' => 255],
-            [['pageSize'], 'integer'],
+            [['pageSizeBack', 'pageSizeFront'], 'integer'],
             [['adminEmail'], 'email'],
         ];
     }
@@ -36,7 +37,8 @@ class Setting extends Model
     {
         return [
             'adminEmail' => 'Email адрес получателя сообщения с формы обратной связи',
-            'pageSize' => 'Кол-во элементов на страницу (для книг)',
+            'pageSizeBack' => 'Кол-во элементов на страницу в админке (для книг)',
+            'pageSizeFront' => 'Кол-во элементов на страницу на сайте (для книг)',
             'urlParse' => 'Источник данных для парсинга (url)',
         ];
     }
@@ -44,7 +46,8 @@ class Setting extends Model
     public function setSettings()
     {
         \Yii::$app->settings->set('admin.adminEmail', $this->adminEmail);
-        \Yii::$app->settings->set('admin.pageSize', (int) $this->pageSize);
+        \Yii::$app->settings->set('admin.pageSizeBack', (int) $this->pageSizeBack);
+        \Yii::$app->settings->set('admin.pageSizeFront', (int) $this->pageSizeFront);
         \Yii::$app->settings->set('admin.urlParse', $this->urlParse);
     }
 }

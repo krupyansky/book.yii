@@ -119,7 +119,7 @@ class OrderController extends AppAdminController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->unlinkAll('orderProduct', true);
+        $this->findModel($id)->unlinkAll('orderBook', true);
         $this->findModel($id)->unlinkAll('orderMail', true);
         $this->findModel($id)->delete();
         Yii::$app->session->setFlash('success', 'Заказ успешно удален!');

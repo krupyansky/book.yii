@@ -10,25 +10,25 @@ use yii\base\Model;
  */
 class Cart extends Model
 {
-    public function addToCart($product, $qty = 1) 
+    public function addToCart($book, $qty = 1) 
     {
         if ($qty == '-1'){
             $qty = -1;
         } else {
             $qty = 1;
         }
-        if (isset($_SESSION['cart'][$product->id])){
-            $_SESSION['cart'][$product->id]['qty'] += $qty;
+        if (isset($_SESSION['cart'][$book->id])){
+            $_SESSION['cart'][$book->id]['qty'] += $qty;
         } else {
-            $_SESSION['cart'][$product->id] = [
-                'title' => $product->title,
+            $_SESSION['cart'][$book->id] = [
+                'title' => $book->title,
                 'qty' => $qty,
-                'img' => $product->thumbnailUrl,
+                'img' => $book->thumbnailUrl,
             ];
         }
         $_SESSION['cart.qty'] = isset($_SESSION['cart.qty']) ? $_SESSION['cart.qty'] + $qty : $qty;
-        if ($_SESSION['cart'][$product->id]['qty'] == 0){
-            unset($_SESSION['cart'][$product->id]);
+        if ($_SESSION['cart'][$book->id]['qty'] == 0){
+            unset($_SESSION['cart'][$book->id]);
         }
     }
     

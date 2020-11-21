@@ -31,7 +31,7 @@
                                 <?php foreach($session['cart'] as $id => $item): ?>
                                 <tr>
                                     <td class="product-col">
-                                        <a href="<?= yii\helpers\Url::to(['product/view', 'id' => $id]) ?>">
+                                        <a href="<?= yii\helpers\Url::to(['book/view', 'id' => $id]) ?>">
                                             <?= \yii\helpers\Html::img("@web/{$item['img']}", ['alt' => $item['title']]) ?>
                                         </a>
                                         <div class="pc-title">

@@ -16,7 +16,7 @@
 <section class="category-section spad">
     <div class="container">
         <div class="row">
-            <?php if(!empty($products)): ?>
+            <?php if(!empty($books)): ?>
             <div class="col-lg-3 order-2 order-lg-1">
                 <?php if(!empty($subcategories)): ?>
                 <div class="filter-widget">
@@ -65,20 +65,20 @@
             </div>
             <div class="col-lg-9  order-1 order-lg-2 mb-5 mb-lg-0">
                 <div class="row">
-                    <?php foreach($products as $product): ?>
+                    <?php foreach($books as $book): ?>
                     <div class="col-lg-3 col-sm-4">
                         <div class="product-item product-item-category">
                             <div class="pi-pic">
-                                <?= \yii\helpers\Html::img("@web/{$product->thumbnailUrl}", ['alt' => $product->title]) ?>
+                                <?= \yii\helpers\Html::img("@web/{$book->thumbnailUrl}", ['alt' => $book->title]) ?>
                                 <div class="pi-links">
-                                    <a href="<?= \yii\helpers\Url::to(['product/view', 'id' => $product->id]) ?>" class="add-card">
+                                    <a href="<?= \yii\helpers\Url::to(['book/view', 'id' => $book->id]) ?>" class="add-card">
                                         <i class="flaticon-bag"></i>
                                         <span>В КОРЗИНУ</span>
                                     </a>
                                 </div>
                             </div>
                             <div class="pi-text">
-                                <p><?= $product->title ?></p>
+                                <p><?= $book->title ?></p>
                             </div>
                         </div>
                     </div>

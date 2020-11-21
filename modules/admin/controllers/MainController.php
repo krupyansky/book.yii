@@ -12,8 +12,8 @@ class MainController extends AppAdminController
     {
         $this->setMeta(\Yii::$app->name . "::Admin | Главная");
         $orders = \app\modules\admin\models\Order::find()->count();
-        $products = \app\modules\admin\models\Book::find()->count();
+        $books = \app\modules\admin\models\Book::find()->count();
         $categories = \app\modules\admin\models\Category::find()->count();
-        return $this->render('index', compact('orders', 'products', 'categories'));
+        return $this->render('index', compact('orders', 'books', 'categories'));
     }
 }
