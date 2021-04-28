@@ -1,5 +1,5 @@
 ## 1. Цель.
-> **Ссылка на тз** https://gitlab.com/prog-positron/test-app-vacancy
+> **Ссылка на тз**
 
 ## 2. Стек технологий.
 * PHP
